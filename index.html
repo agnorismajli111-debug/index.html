@@ -1,4 +1,3 @@
-w
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,6 +7,430 @@ w
   <meta name="description" content="Download Language Program Editor for Windows.">
   <title>axvv-code.com | Language Program Editor</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f3f3ec;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #1a1a1a;
+      line-height: 1.4;
+      padding: 2rem 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid #d0d0c8;
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+    .wordmark {
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: #1a1a1a;
+    }
+    .wordmark span {
+      color: #b34a3a;
+    }
+    .topbar-note, .topbar-index {
+      opacity: 0.6;
+    }
+    .product {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      align-items: center;
+    }
+    .eyebrow {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      color: #3a3a3a;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #2e7d32;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .eyebrow-separator {
+      opacity: 0.4;
+      margin: 0 0.25rem;
+    }
+    h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+    .title-period {
+      color: #b34a3a;
+    }
+    .description {
+      font-size: 1.2rem;
+      color: #3a3a3a;
+      margin-bottom: 2rem;
+      max-width: 90%;
+      border-left: 3px solid #1a1a1a;
+      padding-left: 1rem;
+    }
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .download-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #1a1a1a;
+      color: #f3f3ec;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid #1a1a1a;
+      transition: all 0.15s;
+      border-radius: 0px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .download-button:hover {
+      background: #f3f3ec;
+      color: #1a1a1a;
+    }
+    .tutorial-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: #1a1a1a;
+      text-decoration: none;
+      padding: 1rem 1.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid #1a1a1a;
+      transition: all 0.15s;
+      border-radius: 0px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .tutorial-button:hover {
+      background: #1a1a1a;
+      color: #f3f3ec;
+    }
+    .button-arrow {
+      font-family: monospace;
+      font-size: 1.2rem;
+    }
+    .file-note {
+      font-size: 0.85rem;
+      color: #5a5a5a;
+      letter-spacing: 0.02em;
+    }
+    .file-note span {
+      margin: 0 0.25rem;
+      opacity: 0.6;
+    }
+    .product-art {
+      background: #1a1a1a;
+      color: #f3f3ec;
+      padding: 1.5rem;
+      border-radius: 0px;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+      position: relative;
+    }
+    .art-topline {
+      display: flex;
+      justify-content: space-between;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+      border-bottom: 1px solid #3a3a3a;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .art-tabs {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.8rem;
+      border-bottom: 1px solid #3a3a3a;
+      padding-bottom: 0.5rem;
+    }
+    .active-tab {
+      color: #f3f3ec;
+      font-weight: 600;
+      border-bottom: 2px solid #b34a3a;
+      padding-bottom: 0.5rem;
+      margin-bottom: -0.5rem;
+    }
+    .art-tabs span:not(.active-tab) {
+      opacity: 0.5;
+    }
+    .code-lines {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.25rem 1rem;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .line-number {
+      opacity: 0.3;
+      user-select: none;
+      text-align: right;
+    }
+    .code-muted {
+      color: #6a6a6a;
+    }
+    .code-keyword {
+      color: #d98c6c;
+    }
+    .code-string {
+      color: #9ec07c;
+    }
+    .code-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.2em;
+      background: #f3f3ec;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .art-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.6;
+      border-top: 1px solid #3a3a3a;
+      padding-top: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .art-stamp {
+      position: absolute;
+      bottom: -15px;
+      right: -15px;
+      background: #b34a3a;
+      color: #f3f3ec;
+      font-weight: 700;
+      font-size: 1.2rem;
+      line-height: 1.1;
+      padding: 0.5rem 0.75rem;
+      text-align: right;
+      letter-spacing: -0.02em;
+      transform: rotate(-3deg);
+    }
+    .art-stamp span {
+      font-size: 1.6rem;
+      display: inline-block;
+    }
+    .details {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 2px solid #1a1a1a;
+      border-bottom: 2px solid #1a1a1a;
+      padding: 1.5rem 0;
+    }
+    .details-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      opacity: 0.7;
+    }
+    .details ul {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    .details-build {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.6;
+    }
+    .details-build span {
+      background: #1a1a1a;
+      color: #f3f3ec;
+      padding: 0.1rem 0.5rem;
+      font-size: 0.7rem;
+      margin-left: 0.4rem;
+    }
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-top: 1px solid #d0d0c8;
+      padding-top: 1.5rem;
+      margin-top: auto;
+      color: #5a5a5a;
+    }
+
+    /* ---------- MODAL ---------- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 26, 26, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1.5rem;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .modal {
+      background: #f3f3ec;
+      border: 1px solid #1a1a1a;
+      box-shadow: 12px 12px 0 rgba(0,0,0,0.15);
+      max-width: 620px;
+      width: 100%;
+      padding: 2rem 2rem 1.75rem;
+      position: relative;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      animation: modalIn 0.18s ease-out;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 2px solid #1a1a1a;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .modal-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .modal-title span {
+      color: #b34a3a;
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      color: #1a1a1a;
+      padding: 0 0.25rem;
+      font-family: inherit;
+    }
+    .modal-close:hover {
+      color: #b34a3a;
+    }
+    .modal-body {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .os-block {
+      margin-bottom: 1.5rem;
+    }
+    .os-block:last-child {
+      margin-bottom: 0;
+    }
+    .os-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: #1a1a1a;
+    }
+    .os-badge {
+      display: inline-block;
+      background: #1a1a1a;
+      color: #f3f3ec;
+      font-size: 0.65rem;
+      padding: 0.1rem 0.45rem;
+      letter-spacing: 0.05em;
+    }
+    .os-instructions {
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.85rem;
+      background: #e8e8e0;
+      border-left: 3px solid #b34a3a;
+      padding: 0.75rem 1rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #1a1a1a;
+    }
+
+    @media (max-width: 768px) {
+      .product {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      h1 {
+        font-size: 2.8rem;
+      }
+      .details {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      .details ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .button-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .download-button, .tutorial-button {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -22,10 +445,18 @@ w
         <p class="eyebrow"><span class="status-dot"></span> AVAILABLE NOW <span class="eyebrow-separator">/</span> WINDOWS</p>
         <h1 id="product-title">Language<br>Program Editor<span class="title-period">.</span></h1>
         <p class="description">A small, focused place to write programs in C, C++, Python, HTML, and C#.</p>
-        <a class="download-button" href="downloading.html">
-          <span>Download source folder</span>
-          <span class="button-arrow" aria-hidden="true">-&gt;</span>
-        </a>
+
+        <div class="button-row">
+          <a class="download-button" href="file:///home/agnor/Projects/LanguageProgramEditor">
+            <span>Download source folder</span>
+            <span class="button-arrow" aria-hidden="true">-&gt;</span>
+          </a>
+          <button type="button" class="tutorial-button" id="tutorialBtn">
+            <span>Tutorial</span>
+            <span class="button-arrow" aria-hidden="true">?</span>
+          </button>
+        </div>
+
         <p class="file-note">ZIP archive <span>/</span> Includes build instructions</p>
       </div>
 
@@ -53,5 +484,65 @@ w
   </main>
 
   <footer class="site-footer"><span>AXVV-CODE.COM</span><span>MADE FOR THE NEXT LINE</span></footer>
+
+  <!-- ---------- TUTORIAL MODAL ---------- -->
+  <div class="modal-overlay" id="tutorialModal" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title" id="tutorialTitle">Tutorial<span>.</span></span>
+        <button type="button" class="modal-close" id="modalClose" aria-label="Close tutorial">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="os-block">
+          <div class="os-label"><span class="os-badge">WIN</span> Windows</div>
+          <div class="os-instructions">Run the .bat file</div>
+        </div>
+        <div class="os-block">
+          <div class="os-label"><span class="os-badge">MAC</span> macOS</div>
+          <div class="os-instructions">cd /"your folder directory"/LanguageProgramEditor
+wine build.bat</div>
+        </div>
+        <div class="os-block">
+          <div class="os-label"><span class="os-badge">LNX</span> Linux</div>
+          <div class="os-instructions">SAME AS MAC!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var modal = document.getElementById('tutorialModal');
+      var openBtn = document.getElementById('tutorialBtn');
+      var closeBtn = document.getElementById('modalClose');
+
+      function openModal() {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      openBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+
+      // Click outside the modal box to close
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      // Esc key to close
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+          closeModal();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
